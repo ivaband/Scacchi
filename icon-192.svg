@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <rect width="192" height="192" rx="38" fill="#667eea"/>
+  <rect x="20" y="20" width="152" height="152" rx="22" fill="#ffffff"/>
+  <rect x="36" y="36" width="30" height="30" fill="#f0d9b5"/>
+  <rect x="66" y="36" width="30" height="30" fill="#b58863"/>
+  <rect x="96" y="36" width="30" height="30" fill="#f0d9b5"/>
+  <rect x="126" y="36" width="30" height="30" fill="#b58863"/>
+
+  <rect x="36" y="66" width="30" height="30" fill="#b58863"/>
+  <rect x="66" y="66" width="30" height="30" fill="#f0d9b5"/>
+  <rect x="96" y="66" width="30" height="30" fill="#b58863"/>
+  <rect x="126" y="66" width="30" height="30" fill="#f0d9b5"/>
+
+  <rect x="36" y="96" width="30" height="30" fill="#f0d9b5"/>
+  <rect x="66" y="96" width="30" height="30" fill="#b58863"/>
+  <rect x="96" y="96" width="30" height="30" fill="#f0d9b5"/>
+  <rect x="126" y="96" width="30" height="30" fill="#b58863"/>
+
+  <rect x="36" y="126" width="30" height="30" fill="#b58863"/>
+  <rect x="66" y="126" width="30" height="30" fill="#f0d9b5"/>
+  <rect x="96" y="126" width="30" height="30" fill="#b58863"/>
+  <rect x="126" y="126" width="30" height="30" fill="#f0d9b5"/>
+
+  <text x="96" y="116" text-anchor="middle" font-size="72" font-family="Segoe UI Emoji, Arial" fill="#222">♞</text>
+</svg>

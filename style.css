@@ -1,0 +1,358 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    text-align: center;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    max-width: 700px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 2.2em;
+}
+
+.modalita {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.modalita label {
+    font-weight: bold;
+    color: #555;
+}
+
+.modalita select {
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.info {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    min-height: 80px;
+}
+
+#turno {
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+}
+
+#pensiero {
+    color: #e67e22;
+    font-weight: bold;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+#messaggio {
+    color: #e74c3c;
+    font-weight: bold;
+    min-height: 25px;
+    font-size: 1.1em;
+}
+
+#scacchiera {
+    display: grid;
+    grid-template-columns: repeat(8, 70px);
+    grid-template-rows: repeat(8, 70px);
+    gap: 0;
+    border: 4px solid #333;
+    margin: 20px auto;
+    width: fit-content;
+    position: relative;
+}
+
+.casella {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 45px;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+    position: relative;
+}
+
+.casella.bianca {
+    background-color: #f0d9b5;
+}
+
+.casella.nera {
+    background-color: #b58863;
+}
+
+.casella.selezionata {
+    background-color: #7fc97f !important;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.4);
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+.casella.mossa-valida {
+    background-color: #a8d5a2 !important;
+}
+
+.casella.mossa-valida::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: rgba(46, 204, 113, 0.6);
+    border-radius: 50%;
+    border: 2px solid #27ae60;
+}
+
+.casella.mangiare {
+    background-color: #ff6b6b !important;
+}
+
+.casella.mangiare::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 4px solid #e74c3c;
+    border-radius: 50%;
+    animation: pulse-border 1s infinite;
+}
+
+@keyframes pulse-border {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(0.9); opacity: 0.7; }
+}
+
+.casella.suggerimento {
+    background-color: #f39c12 !important;
+    animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+    from { box-shadow: inset 0 0 5px #f39c12; }
+    to { box-shadow: inset 0 0 20px #f39c12; }
+}
+
+.casella:hover {
+    filter: brightness(1.15);
+}
+
+.pezzo {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    transition: all 0.2s;
+    cursor: grab;
+}
+
+.pezzo:hover {
+    transform: scale(1.15);
+}
+
+.pezzo:active {
+    cursor: grabbing;
+}
+
+.controlli {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+}
+
+button:active {
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.pezzi-catturati {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.pezzi-catturati > div {
+    flex: 1;
+    padding: 15px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 15px;
+    min-height: 60px;
+}
+
+.pezzi-catturati strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    font-size: 0.9em;
+}
+
+#catturati-bianchi, #catturati-neri {
+    font-size: 28px;
+    letter-spacing: 2px;
+}
+
+.istruzioni {
+    margin-top: 20px;
+    padding: 15px;
+    background: #ecf0f1;
+    border-radius: 10px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.istruzioni p {
+    margin: 5px 0;
+}
+
+/* Scacco */
+.scacco {
+    background-color: #e74c3c !important;
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    #scacchiera {
+        grid-template-columns: repeat(8, 45px);
+        grid-template-rows: repeat(8, 45px);
+    }
+    .casella {
+        width: 45px;
+        height: 45px;
+        font-size: 32px;
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+    .modalita {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .modalita label {
+        margin-left: 0 !important;
+    }
+}
+
+html, body {
+    overscroll-behavior: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button, select {
+    touch-action: manipulation;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+        align-items: flex-start;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 16px;
+        border-radius: 16px;
+        margin-top: 10px;
+    }
+
+    #scacchiera {
+        grid-template-columns: repeat(8, min(11vw, 46px));
+        grid-template-rows: repeat(8, min(11vw, 46px));
+        border-width: 3px;
+        margin: 16px auto;
+    }
+
+    .casella {
+        width: min(11vw, 46px);
+        height: min(11vw, 46px);
+        font-size: min(8vw, 32px);
+    }
+
+    .controlli {
+        gap: 8px;
+    }
+
+    button {
+        width: 100%;
+        max-width: 260px;
+        font-size: 0.95em;
+        padding: 12px 16px;
+    }
+
+    .pezzi-catturati {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    #catturati-bianchi,
+    #catturati-neri {
+        font-size: 24px;
+        letter-spacing: 1px;
+        word-break: break-word;
+    }
+
+    .istruzioni {
+        font-size: 0.85em;
+    }
+}

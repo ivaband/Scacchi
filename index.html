@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#667eea">
+    <meta name="description" content="Gioco degli scacchi installabile sul telefono come app PWA">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Scacchi">
+    
+    <title>Scacchi vs Computer</title>
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="icon-192.svg">
+    <link rel="apple-touch-icon" href="icon-192.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>♟️ Scacchi vs Computer</h1>
+        
+        <div class="modalita">
+            <label>Modalità:</label>
+            <select id="modalita" onchange="cambiaModalita()">
+                <option value="2p">2 Giocatori</option>
+                <option value="cpu">vs Computer</option>
+            </select>
+            <label style="margin-left: 20px;">Difficoltà:</label>
+            <select id="difficolta">
+                <option value="1">Principiante</option>
+                <option value="2">Intermedio</option>
+                <option value="3">Avanzato</option>
+            </select>
+        </div>
+
+        <div class="info">
+            <div id="turno">Turno: Bianco (Tu)</div>
+            <div id="pensiero" style="display: none;">🤔 Computer sta pensando...</div>
+            <div id="messaggio"></div>
+        </div>
+
+        <div id="scacchiera"></div>
+        
+        <div class="controlli">
+            <button onclick="nuovaPartita()">Nuova Partita</button>
+            <button onclick="annullaMossa()">Annulla Mossa</button>
+            <button onclick="suggerimentoMossa()">💡 Suggerimento</button>
+            <button id="btn-installa" style="display:none;">📲 Installa App</button>
+        </div>
+
+        <div class="pezzi-catturati">
+            <div>
+                <strong>Bianco:</strong>
+                <div id="catturati-bianchi"></div>
+            </div>
+            <div>
+                <strong>Nero:</strong>
+                <div id="catturati-neri"></div>
+            </div>
+        </div>
+
+        <div class="istruzioni">
+            <p>🖱️ <strong>Clicca</strong> un pezzo per selezionarlo</p>
+            <p>🟢 Le caselle verdi mostrano le mosse valide</p>
+            <p>🔴 Le caselle rosse indicano catture possibili</p>
+            <p>📲 Se supportato, puoi installare il gioco sul telefono</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
