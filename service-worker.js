@@ -1,8 +1,6 @@
-const CACHE_APP = 'scacchi-pwa-v3';
+const CACHE_APP = 'scacchi-pwa-v4';
 
-const FILE_DA_METTERE_IN_CACHE = [
-    '/',
-    '/index.html',
+const ASSET_CACHE = [
     '/manifest.json',
     '/icon-192.svg',
     '/icon-512.svg'
@@ -10,20 +8,16 @@ const FILE_DA_METTERE_IN_CACHE = [
 
 self.addEventListener('install', event => {
     event.waitUntil(
-        caches.open(CACHE_APP).then(cache => cache.addAll(FILE_DA_METTERE_IN_CACHE))
+        caches.open(CACHE_APP).then(cache => cache.addAll(ASSET_CACHE))
     );
     self.skipWaiting();
 });
 
 self.addEventListener('activate', event => {
     event.waitUntil(
-        caches.keys().then(keys => {
-            return Promise.all(
-                keys
-                    .filter(key => key !== CACHE_APP)
-                    .map(key => caches.delete(key))
-            );
-        })
+        caches.keys().then(keys =>
+            Promise.all(keys.filter(k => k !== CACHE_APP).map(k => caches.delete(k)))
+        )
     );
     self.clients.claim();
 });
@@ -31,19 +25,30 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
     if (event.request.method !== 'GET') return;
 
+    const url = new URL(event.request.url);
+
+    // Network-first per index.html: scarica sempre la versione aggiornata
+    if (url.pathname === '/' || url.pathname === '/index.html') {
+        event.respondWith(
+            fetch(event.request)
+                .then(response => {
+                    const copy = response.clone();
+                    caches.open(CACHE_APP).then(cache => cache.put(event.request, copy));
+                    return response;
+                })
+                .catch(() => caches.match(event.request))
+        );
+        return;
+    }
+
+    // Cache-first per tutto il resto (icone, manifest, font CDN)
     event.respondWith(
-        caches.match(event.request).then(rispostaCache => {
-            return rispostaCache || fetch(event.request).then(rispostaRete => {
-                const copia = rispostaRete.clone();
-
-                caches.open(CACHE_APP).then(cache => {
-                    cache.put(event.request, copia);
-                });
-
-                return rispostaRete;
-            }).catch(() => {
-                return caches.match('/index.html');
-            });
+        caches.match(event.request).then(cached => {
+            return cached || fetch(event.request).then(response => {
+                const copy = response.clone();
+                caches.open(CACHE_APP).then(cache => cache.put(event.request, copy));
+                return response;
+            }).catch(() => caches.match('/index.html'));
         })
     );
 });
