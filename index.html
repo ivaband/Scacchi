@@ -257,6 +257,7 @@ header .subtitle{font-style:italic;color:var(--brown-light);font-size:.95rem;let
           <button class="btn" id="flipBtn">⇅ Ruota</button>
         </div>
         <button class="btn" id="btnBackLobby">← Lobby</button>
+        <button class="btn danger" id="abandonBtn" style="margin-top:6px">⚑ Abbandona</button>
       </div>
       <div class="panel-card">
         <h3>Pezzi catturati</h3>
@@ -627,7 +628,7 @@ auth.onAuthStateChanged(async user=>{
     }else{
       await db.collection('users').doc(user.uid).set({email:user.email,displayName:'',createdAt:firebase.firestore.FieldValue.serverTimestamp()});
     }
-    if(Notification.permission==='default') document.getElementById('notifBar').classList.remove('hidden');
+    if('Notification' in window && Notification.permission==='default') document.getElementById('notifBar').classList.remove('hidden');
     startLobbyListeners(user);
     show('Lobby');
   }else{
@@ -729,6 +730,27 @@ document.getElementById('btnBackLobby').onclick=()=>{
   if(gameUnsubscribe){gameUnsubscribe();gameUnsubscribe=null;}
   show('Lobby');
   if(auth.currentUser)loadActiveGames(auth.currentUser);
+};
+
+document.getElementById('abandonBtn').onclick=async()=>{
+  if(gameOver)return;
+  if(!confirm('Sei sicuro di voler abbandonare la partita?'))return;
+  if(isOnlineMode&&currentGameId){
+    const loser=myColor;
+    const winner=opp(loser);
+    const result=winner==='w'?'white':'black';
+    try{
+      await db.collection('games').doc(currentGameId).update({status:'finished',result});
+    }catch(e){console.error(e);}
+    if(gameUnsubscribe){gameUnsubscribe();gameUnsubscribe=null;}
+    show('Lobby');
+    if(auth.currentUser)loadActiveGames(auth.currentUser);
+  }else{
+    gameOver=true;
+    setStatus('Partita abbandonata.','game-over');
+    setTurnIndicator(null);
+    clearTimeout(autoPlayTimer);
+  }
 };
 
 // ============================================================
