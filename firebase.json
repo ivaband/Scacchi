@@ -1,0 +1,15 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "functions/**",
+      "firebase-messaging-sw.js",
+      "scacchi.html",
+      "style.css",
+      "script.js"
+    ]
+  }
+}

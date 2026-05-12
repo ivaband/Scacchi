@@ -1,13 +1,13 @@
 {
-  "name": "Scacchi vs Computer",
+  "name": "Scacchi Regali",
   "short_name": "Scacchi",
-  "description": "Gioco degli scacchi installabile sul telefono come PWA",
-  "start_url": "./index.html",
-  "scope": "./",
+  "description": "Il gioco dei re — Gioca online con i tuoi amici",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#ffffff",
-  "theme_color": "#667eea",
+  "background_color": "#1a1208",
+  "theme_color": "#c9a84c",
   "icons": [
     {
       "src": "icon-192.svg",

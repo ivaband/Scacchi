@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="96" fill="#667eea"/>
-  <rect x="54" y="54" width="404" height="404" rx="54" fill="#ffffff"/>
+  <rect width="512" height="512" rx="96" fill="#1a1208"/>
+  <rect x="54" y="54" width="404" height="404" rx="54" fill="#2a1e0a" stroke="#c9a84c" stroke-width="10"/>
 
   <rect x="96" y="96" width="80" height="80" fill="#f0d9b5"/>
   <rect x="176" y="96" width="80" height="80" fill="#b58863"/>
@@ -22,5 +22,5 @@
   <rect x="256" y="336" width="80" height="80" fill="#b58863"/>
   <rect x="336" y="336" width="80" height="80" fill="#f0d9b5"/>
 
-  <text x="256" y="318" text-anchor="middle" font-size="190" font-family="Segoe UI Emoji, Arial" fill="#222">♞</text>
+  <text x="256" y="318" text-anchor="middle" font-size="190" font-family="Segoe UI Emoji, Arial" fill="#c9a84c">♞</text>
 </svg>

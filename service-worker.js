@@ -1,13 +1,11 @@
-const CACHE_APP = 'scacchi-pwa-v1';
+const CACHE_APP = 'scacchi-pwa-v3';
 
 const FILE_DA_METTERE_IN_CACHE = [
-    './',
-    './index.html',
-    './style.css',
-    './script.js',
-    './manifest.json',
-    './icon-192.svg',
-    './icon-512.svg'
+    '/',
+    '/index.html',
+    '/manifest.json',
+    '/icon-192.svg',
+    '/icon-512.svg'
 ];
 
 self.addEventListener('install', event => {
@@ -44,7 +42,7 @@ self.addEventListener('fetch', event => {
 
                 return rispostaRete;
             }).catch(() => {
-                return caches.match('./index.html');
+                return caches.match('/index.html');
             });
         })
     );

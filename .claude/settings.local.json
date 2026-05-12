@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(New-Item -ItemType Directory -Force -Path \"c:\\\\Users\\\\Utente\\\\Desktop\\\\Programmi ivan\\\\Scacchi\\\\functions\")",
+      "Bash(ls \"c:\\\\Users\\\\Utente\\\\Desktop\\\\Programmi ivan\\\\Scacchi\\\\\")",
+      "Read(//c/Users/Utente/Desktop/Programmi ivan/**)",
+      "PowerShell(Copy-Item \"c:\\\\Users\\\\Utente\\\\Desktop\\\\Programmi ivan\\\\Scacchi\\\\scacchi.html\" \"c:\\\\Users\\\\Utente\\\\Desktop\\\\Programmi ivan\\\\Scacchi\\\\index.html\" -Force)"
+    ]
+  }
+}
