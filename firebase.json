@@ -9,7 +9,9 @@
       "firebase-messaging-sw.js",
       "scacchi.html",
       "style.css",
-      "script.js"
+      "script.js",
+      "README.md",
+      "CLAUDE.md"
     ]
   }
 }

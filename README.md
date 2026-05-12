@@ -22,6 +22,8 @@ firebase login
 
 ### 2. Avviare il server locale (Hosting)
 
+npx serve 
+
 ```bash
 firebase serve --only hosting
 ```
